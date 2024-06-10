@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Prompt the user for each part of the subject line
-read -p "Enter country code 'US' (C): " country
-read -p "Enter state or province name 'California' (ST): " state
-read -p "Enter locality 'Los Angeles' (L): " locality
-read -p "Enter organization name 'crDroid' (O): " organization
-read -p "Enter organizational unit 'crDroid' (OU): " organizational_unit
-read -p "Enter common name 'crdroid' (CN): " common_name
-read -p "Enter email address 'android@android.com' (emailAddress): " email
+read -p "Enter country code 'UA' (C): " country
+read -p "Enter state or province name 'Lviv' (ST): " state
+read -p "Enter locality 'Lviv' (L): " locality
+read -p "Enter organization name 'PixelOs' (O): " organization
+read -p "Enter organizational unit 'PixelOs' (OU): " organizational_unit
+read -p "Enter common name 'pixelos' (CN): " common_name
+read -p "Enter email address 'viitiv.m@gmail.com' (emailAddress): " email
 
 # Construct the subject line
 subject="/C=${country}/ST=${state}/L=${locality}/O=${organization}/OU=${organizational_unit}/CN=${common_name}/emailAddress=${email}"
@@ -37,10 +37,10 @@ done
 
 
 ## Create vendor for keys
-mkdir vendor/evolution-priv
-mv ~/.android-certs vendor/evolution-priv/keys
-echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/lineage-priv/keys/releasekey" > vendor/lineage-priv/keys/keys.mk
-cat <<EOF > vendor/evolution-priv/keys/BUILD.bazel
+mkdir vendor/aosp-priv
+mv ~/.android-certs vendor/aosp-priv/keys
+echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/aosp-priv/keys/releasekey" > vendor/aosp-priv/keys/keys.mk
+cat <<EOF > vendor/aosp-priv/keys/BUILD.bazel
 filegroup(
     name = "android_certificate_directory",
     srcs = glob([
@@ -51,6 +51,6 @@ filegroup(
 )
 EOF
 
-echo "Done! Now build as usual. If builds aren't being signed, add '-include vendor/evolution-priv/keys/keys.mk' to your device mk file"
-echo "Make copies of your vendor/lineage-priv folder as it contains your keys!"
+echo "Done! Now build as usual. If builds aren't being signed, add '-include vendor/aosp-priv/keys/keys.mk' to your device mk file"
+echo "Make copies of your vendor/aosp-priv folder as it contains your keys!"
 sleep 3
